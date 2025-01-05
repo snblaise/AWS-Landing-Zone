@@ -1,5 +1,5 @@
 # Ignore CloudFormation parameters JSON file
-parameters
+parameters.json
 
 # Ignore other sensitive files
 *.pem

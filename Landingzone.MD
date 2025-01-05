@@ -36,26 +36,28 @@ Creating a landing zone involves several steps and best practices to ensure a se
 For detailed guidance on building a landing zone, check out the [AWS Prescriptive Guidance on Building a Landing Zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-aws-environment/building-landing-zones.html).
 
 ### AWS Landing Zone Organizational Structure
-Here's a sample structured organization for the our AWS landing zone:
+Here's a sample structured organization for our AWS landing zone:
 
 1. **Security Organizational Unit (OU)**
-    - Centralized logging
-    - Security roles
+  - **Centralized Logging**: This unit is responsible for aggregating and storing logs from various AWS accounts and services. It ensures that all activities are logged for security and compliance purposes.
+  - **Security Roles**: This unit manages roles and permissions related to security, ensuring that security policies and guardrails are enforced across the organization.
 
 2. **Sandbox OU**
-    - For experimentation and testing
+  - **For Experimentation and Testing**: This unit provides a safe environment for developers and teams to experiment with new services, features, and configurations without affecting production environments. It allows for innovation and testing of new ideas.
 
 3. **Development OU**
-    - For development environments
+  - **For Development Environments**: This unit hosts development environments where application development takes place. It provides isolated environments for developers to build and test their applications before moving to higher environments.
 
 4. **UAT (User Acceptance Testing) OU**
-    - For testing environments
+  - **For Testing Environments**: This unit is dedicated to user acceptance testing. It allows stakeholders and end-users to test and validate the applications in an environment that closely resembles production, ensuring that the applications meet the required standards and specifications.
 
 5. **Production OU**
-    - For production environments
+  - **For Production Environments**: This unit hosts the production environments where live applications and services run. It ensures high availability, reliability, and performance for end-users. Strict security and compliance measures are enforced in this unit.
 
 6. **Shared Resources OU**
-    - For shared services and resources
+  - **For Shared Services and Resources**: This unit manages shared services and resources that are used across multiple accounts and environments. It includes services like networking, directory services, and other common infrastructure components that need to be centrally managed.
+
+This structured organization helps in maintaining a clear separation of responsibilities, enhances security, and ensures efficient management of AWS resources across different stages of the application lifecycle.
 
 ### Creating a Landing Zone Using AWS CloudFormation
 AWS CloudFormation is a service that allows you to define and provision AWS infrastructure as code. By using CloudFormation templates, you can automate the creation of your landing zone.

@@ -58,6 +58,7 @@ In your terminal navigate to the directory where your files are located and use 
 
 ```sh
 aws cloudformation create-stack --stack-name MyLandingZoneStack --template-body landingzone.yml --parameters parameters.json --capabilities CAPABILITY_NAMED_IAM
+```
 
 ### 5. Verify the Created Template and Its Resources Using AWS CLI
 

@@ -1,4 +1,4 @@
-# Ignore CloudFormation parameters JSON file
+# Ignore specific CloudFormation parameters JSON file
 parameters.json
 
 # Ignore other sensitive files

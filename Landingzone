@@ -1,4 +1,6 @@
-
+```markdown
+![AWS Landing Zone Organizational Structure](Automating landing zone deployment on AWS.png)
+```
 ## AWS Landing Zone Automation With CloudFormation
 ### Introduction
 Establishing a secure, scalable, and well-governed environment is crucial for organizations in today's cloud-centric world. This is where a landing zone comes into play. A landing zone is a pre-configured, secure, multi-account AWS environment that adheres to best practices. It provides a foundation for your AWS infrastructure, ensuring compliance, security, and efficient management.

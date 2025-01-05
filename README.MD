@@ -1,7 +1,7 @@
 
 # AWS Landing Zone Setup with CloudFormation
 
-![AWS Landing Zone Organizational Structure](./Automating-landing-zone-deployment-on-AWS.png)
+![AWS Landing Zone Organizational Structure](./image.png)
 
 ## Introduction
 This project provides a CloudFormation template to set up a secure, scalable, and well-governed AWS landing zone. The landing zone includes multiple organizational units (OUs) and IAM roles for different departments, ensuring compliance, security, and efficient management of AWS resources.

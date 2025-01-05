@@ -1,10 +1,16 @@
 
+---
+kicker: "AWS CloudFormation"
+title: "Automating AWS Landing Zone Setup"
+subtitle: "A Comprehensive Guide to Establishing a Secure and Scalable AWS Environment"
+---
+
 ## AWS Landing Zone Automation With CloudFormation
+![AWS Landing Zone Organizational Structure](./image.png)
 ### Introduction
 Establishing a secure, scalable, and well-governed environment is crucial for organizations in today's cloud-centric world. This is where a landing zone comes into play. A landing zone is a pre-configured, secure, multi-account AWS environment that adheres to best practices. It provides a foundation for your AWS infrastructure, ensuring compliance, security, and efficient management.
 
 For more information on landing zones, you can refer to the [AWS Prescriptive Guidance](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-aws-environment/understanding-landing-zones.html).
-
 
 ### Why the Landing Zone
 A landing zone is essential for several reasons:
@@ -12,7 +18,6 @@ A landing zone is essential for several reasons:
 2. **Scalability**: It provides a scalable foundation for your AWS resources.
 3. **Governance**: It helps in managing and governing multiple AWS accounts efficiently.
 4. **Cost Management**: It aids in tracking and managing costs across different accounts.
-
 
 ### How a Landing Zone is Created
 
@@ -30,52 +35,35 @@ Creating a landing zone involves several steps and best practices to ensure a se
 
 6. **Regular Audits and Compliance Checks**: Conduct regular audits and compliance checks using AWS Config and AWS Security Hub. AWS Config provides a detailed view of the configuration of AWS resources in your account, while AWS Security Hub aggregates, organizes, and prioritizes security alerts and findings from multiple AWS services. These services help you maintain compliance with industry standards and best practices.
 
-
 For detailed guidance on building a landing zone, check out the [AWS Prescriptive Guidance on Building a Landing Zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-aws-environment/building-landing-zones.html).
 
 ### AWS Landing Zone Organizational Structure
 Here's a sample structured organization for the our AWS landing zone:
 
 1. **Security Organizational Unit (OU)**
-   - Centralized logging
-   - Security roles
+  - Centralized logging
+  - Security roles
 
 2. **Sandbox OU**
-   - For experimentation and testing
+  - For experimentation and testing
 
 3. **Development OU**
-   - For development environments
+  - For development environments
 
 4. **UAT (User Acceptance Testing) OU**
-   - For testing environments
+  - For testing environments
 
 5. **Production OU**
-   - For production environments
+  - For production environments
 
 6. **Shared Resources OU**
-   - For shared services and resources
+  - For shared services and resources
 
 ### Creating a Landing Zone Using AWS CloudFormation
 AWS CloudFormation is a service that allows you to define and provision AWS infrastructure as code. By using CloudFormation templates, you can automate the creation of your landing zone.
 
 #### Step 1: Define the CloudFormation Template
 First, you need to define a CloudFormation template that specifies the resources and configurations for your landing zone. In the following section, we will break down our template written in YAML language to understand the various sections in detail.
-
-#### CloudFormation Template Breakdown
-
-A CloudFormation template is a JSON or YAML formatted text file that describes the AWS infrastructure needed to deploy your landing zone. The template consists of several key sections:
-
-1. **Parameters**: This section defines the inputs required for the template. Parameters allow you to customize aspects of your template at runtime. For example, you can specify the names of organizational units, account IDs, and retention periods.
-
-2. **Resources**: This is the most critical section of the template. It defines the AWS resources that CloudFormation will create and manage. In our case, this includes the landing zone setup, IAM roles, and role attachments.
-
-3. **Outputs**: This optional section declares output values that you can import into other stacks or view on the CloudFormation console. Outputs can include resource IDs, IP addresses, or any other information you might need after the stack is created.
-
-4. **Mappings**: This section allows you to create custom mappings like region-specific AMIs, which can be used to conditionally set values in your template.
-
-5. **Conditions**: Conditions enable you to control whether certain resources are created or certain properties are assigned based on input parameter values.
-
-6. **Metadata**: This section is used to include additional information about the template. It can be helpful for documentation purposes.
 
 #### CloudFormation Template Breakdown
 
@@ -102,38 +90,38 @@ Description: AWS Landing Zone Setup with User Roles and Attachments
 # Metadata section
 Metadata:
   AWS::CloudFormation::Interface:
-    ParameterGroups:
-      - Label:
-          default: "Organizational Units"
-        Parameters:
-          - SecurityOuName
-          - SandboxOuName
-          - DevelopmentOuName
-          - UatOuName
-          - ProductionOuName
-          - SharedResourcesOuName
-      - Label:
-          default: "Account IDs"
-        Parameters:
-          - CentralizedLoggingAccountId
-          - SecurityAccountId
-      - Label:
-          default: "Retention Periods"
-        Parameters:
-          - LoggingBucketRetentionPeriod
-          - AccessLoggingBucketRetentionPeriod
-      - Label:
-          default: "KMS Key"
-        Parameters:
-          - KMSKey
+   ParameterGroups:
+    - Label:
+       default: "Organizational Units"
+      Parameters:
+       - SecurityOuName
+       - SandboxOuName
+       - DevelopmentOuName
+       - UatOuName
+       - ProductionOuName
+       - SharedResourcesOuName
+    - Label:
+       default: "Account IDs"
+      Parameters:
+       - CentralizedLoggingAccountId
+       - SecurityAccountId
+    - Label:
+       default: "Retention Periods"
+      Parameters:
+       - LoggingBucketRetentionPeriod
+       - AccessLoggingBucketRetentionPeriod
+    - Label:
+       default: "KMS Key"
+      Parameters:
+       - KMSKey
 
 # Mappings section
 Mappings:
   RegionMap:
-    us-east-1:
-      AMI: ami-0axxxxxxxxxxxx
-    us-west-2:
-      AMI: ami-0axxxxxxxxxxxx
+   us-east-1:
+    AMI: ami-0axxxxxxxxxxxx
+   us-west-2:
+    AMI: ami-0axxxxxxxxxxxx
 
 # Conditions section
 Conditions:
@@ -143,174 +131,187 @@ Conditions:
 # Parameters section 
 Parameters:
   GovernedRegions:
-    Type: List
-    Description: List of governed regions
+   Type: List
+   Description: List of governed regions
   SecurityOuName:
-    Type: String
-    Description: The security Organizational Unit name
+   Type: String
+   Description: The security Organizational Unit name
   SandboxOuName:
-    Type: String
-    Description: The sandbox Organizational Unit name
+   Type: String
+   Description: The sandbox Organizational Unit name
   DevelopmentOuName:
-    Type: String
-    Description: The development Organizational Unit name
+   Type: String
+   Description: The development Organizational Unit name
   UatOuName:
-    Type: String
-    Description: The UAT Organizational Unit name
+   Type: String
+   Description: The UAT Organizational Unit name
   ProductionOuName:
-    Type: String
-    Description: The production Organizational Unit name
+   Type: String
+   Description: The production Organizational Unit name
   SharedResourcesOuName:
-    Type: String
-    Description: The shared resources Organizational Unit name
+   Type: String
+   Description: The shared resources Organizational Unit name
   CentralizedLoggingAccountId:
-    Type: String
-    Description: The AWS account ID for centralized logging
+   Type: String
+   Description: The AWS account ID for centralized logging
   SecurityAccountId:
-    Type: String
-    Description: The AWS account ID for security roles
+   Type: String
+   Description: The AWS account ID for security roles
   LoggingBucketRetentionPeriod:
-    Type: Number
-    Description: Retention period for centralized logging bucket
+   Type: Number
+   Description: Retention period for centralized logging bucket
   AccessLoggingBucketRetentionPeriod:
-    Type: Number
-    Description: Retention period for access logging bucket
+   Type: Number
+   Description: Retention period for access logging bucket
   KMSKey:
-    Type: String
-    Description: The ARN of the KMS key for encryption
+   Type: String
+   Description: The ARN of the KMS key for encryption
 
 # Resources section
 Resources:
   MyLandingZone:
-    Type: 'AWS::ControlTower::LandingZone'
-    Properties:
-      Version: '1.0'
-      Tags:
-        - Key: 'Environment'
-          Value: 'Production'
-      Manifest:
-        governedRegions: !Ref GovernedRegions
-        organizationStructure:
-          security:
-            name: !Ref SecurityOuName
-          sandbox:
-            name: !Ref SandboxOuName
-          development:
-            name: !Ref DevelopmentOuName
-          uat:
-            name: !Ref UatOuName
-          production:
-            name: !Ref ProductionOuName
-          sharedResources:
-            name: !Ref SharedResourcesOuName
-        centralizedLogging:
-          accountId: !Ref CentralizedLoggingAccountId
-          configurations:
-            loggingBucket:
-              retentionDays: !Ref LoggingBucketRetentionPeriod
-            accessLoggingBucket:
-              retentionDays: !Ref AccessLoggingBucketRetentionPeriod
-            kmsKeyArn: !Ref KMSKey
-            enabled: true
-        securityRoles:
-          accountId: !Ref SecurityAccountId
-          accessManagement:
-            enabled: true
+   Type: 'AWS::ControlTower::LandingZone'
+   Properties:
+    Version: '1.0'
+    Tags:
+      - Key: 'Environment'
+       Value: 'Production'
+    Manifest:
+      governedRegions: !Ref GovernedRegions
+      organizationStructure:
+       security:
+        name: !Ref SecurityOuName
+       sandbox:
+        name: !Ref SandboxOuName
+       development:
+        name: !Ref DevelopmentOuName
+       uat:
+        name: !Ref UatOuName
+       production:
+        name: !Ref ProductionOuName
+       sharedResources:
+        name: !Ref SharedResourcesOuName
+      centralizedLogging:
+       accountId: !Ref CentralizedLoggingAccountId
+       configurations:
+        loggingBucket:
+          retentionDays: !Ref LoggingBucketRetentionPeriod
+        accessLoggingBucket:
+          retentionDays: !Ref AccessLoggingBucketRetentionPeriod
+        kmsKeyArn: !Ref KMSKey
+        enabled: true
+      securityRoles:
+       accountId: !Ref SecurityAccountId
+       accessManagement:
+        enabled: true
 
   ManagementRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      RoleName: !Ref ManagementRoleName
-      AssumeRolePolicyDocument:
+   Type: 'AWS::IAM::Role'
+   Properties:
+    RoleName: !Ref ManagementRoleName
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+       - Effect: Allow
+        Principal:
+          AWS: '*'
+        Action: 'sts:AssumeRole'
+    Policies:
+      - PolicyName: ManagementPolicy
+       PolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
-            Principal:
-              AWS: '*'
-            Action: 'sts:AssumeRole'
-      Policies:
-        - PolicyName: ManagementPolicy
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'ec2:*'
-                  - 's3:*'
-                  - 'cloudwatch:*'
-                Resource: '*'
+           Action:
+            - 'ec2:*'
+            - 's3:*'
+            - 'cloudwatch:*'
+           Resource: '*'
 
   DeveloperRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      RoleName: !Ref DeveloperRoleName
-      AssumeRolePolicyDocument:
+   Type: 'AWS::IAM::Role'
+   Properties:
+    RoleName: !Ref DeveloperRoleName
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+       - Effect: Allow
+        Principal:
+          AWS: '*'
+        Action: 'sts:AssumeRole'
+    Policies:
+      - PolicyName: DeveloperPolicy
+       PolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
-            Principal:
-              AWS: '*'
-            Action: 'sts:AssumeRole'
-      Policies:
-        - PolicyName: DeveloperPolicy
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 'ec2:*'
-                  - 's3:*'
-                  - 'cloudwatch:*'
-                Resource: '*'
+           Action:
+            - 'ec2:*'
+            - 's3:*'
+            - 'cloudwatch:*'
+           Resource: '*'
 
   SalesRole:
-    Type: 'AWS::IAM::Role'
-    Properties:
-      RoleName: !Ref SalesRoleName
-      AssumeRolePolicyDocument:
+   Type: 'AWS::IAM::Role'
+   Properties:
+    RoleName: !Ref SalesRoleName
+    AssumeRolePolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+       - Effect: Allow
+        Principal:
+          AWS: '*'
+        Action: 'sts:AssumeRole'
+    Policies:
+      - PolicyName: SalesPolicy
+       PolicyDocument:
         Version: '2012-10-17'
         Statement:
           - Effect: Allow
-            Principal:
-              AWS: '*'
-            Action: 'sts:AssumeRole'
-      Policies:
-        - PolicyName: SalesPolicy
-          PolicyDocument:
-            Version: '2012-10-17'
-            Statement:
-              - Effect: Allow
-                Action:
-                  - 's3:*'
-                  - 'cloudwatch:*'
-                Resource: '*'
+           Action:
+            - 's3:*'
+            - 'cloudwatch:*'
+           Resource: '*'
 
   AttachManagementRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
-    Properties:
-      RoleName: !Ref ManagementRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${ManagementAccountId}:policy/ManagementPolicy'
+   Type: 'AWS::IAM::RolePolicyAttachment'
+   Properties:
+    RoleName: !Ref ManagementRoleArn
+    PolicyArn: !Sub 'arn:aws:iam::${ManagementAccountId}:policy/ManagementPolicy'
 
   AttachDeveloperRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
-    Properties:
-      RoleName: !Ref DeveloperRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${DeveloperAccountId}:policy/DeveloperPolicy'
+   Type: 'AWS::IAM::RolePolicyAttachment'
+   Properties:
+    RoleName: !Ref DeveloperRoleArn
+    PolicyArn: !Sub 'arn:aws:iam::${DeveloperAccountId}:policy/DeveloperPolicy'
 
   AttachSalesRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
-    Properties:
-      RoleName: !Ref SalesRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${SalesAccountId}:policy/SalesPolicy'
+   Type: 'AWS::IAM::RolePolicyAttachment'
+   Properties:
+    RoleName: !Ref SalesRoleArn
+    PolicyArn: !Sub 'arn:aws:iam::${SalesAccountId}:policy/SalesPolicy'
 
 # Outputs section
 Outputs:
   LandingZoneId:
-    Description: "The ID of the created landing zone"
-    Value: !Ref MyLandingZone
+   Description: "The ID of the created landing zone"
+   Value: !Ref MyLandingZone
   ManagementRoleArn:
-    Description: "The ARN of the Management IAM Role"
-    Value: !GetAtt ManagementRole.Arn
+   Description: "The ARN of the Management IAM Role"
+   Value: !GetAtt ManagementRole.Arn
+  DeveloperRoleArn:
+   Description: "The ARN of the Developer IAM Role"
+   Value: !GetAtt DeveloperRole.Arn
+  SalesRoleArn:
+   Description: "The ARN of the Sales IAM Role"
+   Value: !GetAtt SalesRole.Arn
+  CentralizedLoggingBucket:
+   Description: "The name of the centralized logging S3 bucket"
+   Value: !Ref CentralizedLoggingBucket
+  AccessLoggingBucket:
+   Description: "The name of the access logging S3 bucket"
+   Value: !Ref AccessLoggingBucket
+```
   DeveloperRoleArn:
     Description: "The ARN of the Developer IAM Role"
     Value: !GetAtt DeveloperRole.Arn

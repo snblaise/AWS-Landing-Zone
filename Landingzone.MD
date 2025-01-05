@@ -14,10 +14,10 @@ For more information on landing zones, you can refer to the [AWS Prescriptive Gu
 
 ### Why the Landing Zone
 A landing zone is essential for several reasons:
-1. **Security and Compliance**: It ensures that your AWS environment adheres to security and compliance standards.
-2. **Scalability**: It provides a scalable foundation for your AWS resources.
-3. **Governance**: It helps in managing and governing multiple AWS accounts efficiently.
-4. **Cost Management**: It aids in tracking and managing costs across different accounts.
+ - **Security and Compliance**: It ensures that your AWS environment adheres to security and compliance standards.
+ - **Scalability**: It provides a scalable foundation for your AWS resources.
+ - **Governance**: It helps in managing and governing multiple AWS accounts efficiently.
+ - **Cost Management**: It aids in tracking and managing costs across different accounts.
 
 ### How a Landing Zone is Created
 
@@ -25,15 +25,13 @@ Creating a landing zone involves several steps and best practices to ensure a se
 
 1. **Use AWS Organizations**: Leverage AWS Organizations to create and manage multiple AWS accounts. This helps in isolating workloads and managing permissions effectively.
 
-2. **Implement Security Controls**: Use AWS Control Tower to enforce security policies and guardrails. AWS Control Tower is a service that automates the setup of a secure, well-architected multi-account AWS environment. It provides a straightforward way to set up and govern a secure, multi-account AWS environment based on AWS best practices.
+2. **Implement Security Controls**: Use AWS Control Tower to enforce security policies and guardrails. AWS Control Tower automates the setup of a secure, well-architected multi-account AWS environment based on AWS best practices.
 
-3. **Use AWS Organizations**: AWS Organizations is a service that helps you centrally manage and govern your environment as you grow and scale your AWS resources. Leverage AWS Organizations to create and manage multiple AWS accounts. This helps in isolating workloads and managing permissions effectively.
+3. **Centralize Logging and Monitoring**: Set up centralized logging and monitoring using AWS CloudTrail and Amazon CloudWatch. AWS CloudTrail records AWS API calls for your account and delivers log files to you, while Amazon CloudWatch monitors your AWS resources and applications in real-time. This ensures that all activities are logged and monitored for security and compliance purposes.
 
-4. **Centralize Logging and Monitoring**: Set up centralized logging and monitoring using AWS CloudTrail and Amazon CloudWatch. AWS CloudTrail records AWS API calls for your account and delivers log files to you, while Amazon CloudWatch monitors your AWS resources and applications in real-time. This ensures that all activities are logged and monitored for security and compliance purposes.
+4. **Automate with Infrastructure as Code**: Use AWS CloudFormation to automate the provisioning of your landing zone. AWS CloudFormation allows you to model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications. CloudFormation templates allow you to define your infrastructure as code, making it easy to replicate and manage.
 
-5. **Automate with Infrastructure as Code**: Use AWS CloudFormation to automate the provisioning of your landing zone. AWS CloudFormation is a service that allows you to model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications. CloudFormation templates allow you to define your infrastructure as code, making it easy to replicate and manage.
-
-6. **Regular Audits and Compliance Checks**: Conduct regular audits and compliance checks using AWS Config and AWS Security Hub. AWS Config provides a detailed view of the configuration of AWS resources in your account, while AWS Security Hub aggregates, organizes, and prioritizes security alerts and findings from multiple AWS services. These services help you maintain compliance with industry standards and best practices.
+5. **Regular Audits and Compliance Checks**: Conduct regular audits and compliance checks using AWS Config and AWS Security Hub. AWS Config provides a detailed view of the configuration of AWS resources in your account, while AWS Security Hub aggregates, organizes, and prioritizes security alerts and findings from multiple AWS services. These services help you maintain compliance with industry standards and best practices.
 
 For detailed guidance on building a landing zone, check out the [AWS Prescriptive Guidance on Building a Landing Zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-aws-environment/building-landing-zones.html).
 
@@ -41,23 +39,23 @@ For detailed guidance on building a landing zone, check out the [AWS Prescriptiv
 Here's a sample structured organization for the our AWS landing zone:
 
 1. **Security Organizational Unit (OU)**
-  - Centralized logging
-  - Security roles
+    - Centralized logging
+    - Security roles
 
 2. **Sandbox OU**
-  - For experimentation and testing
+    - For experimentation and testing
 
 3. **Development OU**
-  - For development environments
+    - For development environments
 
 4. **UAT (User Acceptance Testing) OU**
-  - For testing environments
+    - For testing environments
 
 5. **Production OU**
-  - For production environments
+    - For production environments
 
 6. **Shared Resources OU**
-  - For shared services and resources
+    - For shared services and resources
 
 ### Creating a Landing Zone Using AWS CloudFormation
 AWS CloudFormation is a service that allows you to define and provision AWS infrastructure as code. By using CloudFormation templates, you can automate the creation of your landing zone.
@@ -312,24 +310,11 @@ Outputs:
    Description: "The name of the access logging S3 bucket"
    Value: !Ref AccessLoggingBucket
 ```
-  DeveloperRoleArn:
-    Description: "The ARN of the Developer IAM Role"
-    Value: !GetAtt DeveloperRole.Arn
-  SalesRoleArn:
-    Description: "The ARN of the Sales IAM Role"
-    Value: !GetAtt SalesRole.Arn
-  CentralizedLoggingBucket:
-    Description: "The name of the centralized logging S3 bucket"
-    Value: !Ref CentralizedLoggingBucket
-  AccessLoggingBucket:
-    Description: "The name of the access logging S3 bucket"
-    Value: !Ref AccessLoggingBucket
-```
 
 This template provides a comprehensive setup for an AWS landing zone, including organizational units, centralized logging, and IAM roles. By defining your infrastructure as code, you can ensure consistency and repeatability across your AWS environments. 
 
 #### Additional Roles and Responsibilities Note
-More roles and their respections can be added based on the needs and responsiblities following least preveledge rules for employees of the company e.g DevSecOps roles, cloudengineer role etc. 
+More roles and their responsibilities can be added based on the needs and responsibilities following least privilege rules for employees of the company e.g DevSecOps roles, cloud engineer role etc. 
 
 For more detailed information on setting up a landing zone, refer to the [AWS Prescriptive Guidance on Setting Up a Landing Zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/designing-control-tower-landing-zone/setup.html).
 
@@ -402,6 +387,4 @@ After deploying the CloudFormation stack, it's essential to verify that the temp
 Automating your AWS landing zone setup with CloudFormation ensures a secure, scalable, and well-governed environment. Leverage CloudFormation templates for consistency, compliance, and efficient management of AWS resources.
 
 For more information, refer to the [AWS CLI User Guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html).
-
-
 

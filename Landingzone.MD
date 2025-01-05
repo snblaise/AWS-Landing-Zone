@@ -1,8 +1,10 @@
 
 ---
-kicker: "AWS CloudFormation"
-title: "Automating AWS Landing Zone Setup"
-subtitle: "A Comprehensive Guide to Establishing a Secure and Scalable AWS Environment"
+ ## AWS CloudFormation
+
+# Automating AWS Landing Zone Setup
+
+ ## A Comprehensive Guide to Establishing a Secure and Scalable AWS Environment
 ---
 
 ## AWS Landing Zone Automation With CloudFormation
@@ -23,15 +25,15 @@ A landing zone is essential for several reasons:
 
 Creating a landing zone involves several steps and best practices to ensure a secure and scalable environment. Here's a high-level overview of the process:
 
-1. **Use AWS Organizations**: Leverage AWS Organizations to create and manage multiple AWS accounts. This helps in isolating workloads and managing permissions effectively.
+1. **Use AWS Organizations**: Leverage [AWS Organizations](https://aws.amazon.com/organizations/) to create and manage multiple AWS accounts. This helps in isolating workloads and managing permissions effectively.
 
-2. **Implement Security Controls**: Use AWS Control Tower to enforce security policies and guardrails. AWS Control Tower automates the setup of a secure, well-architected multi-account AWS environment based on AWS best practices.
+2. **Implement Security Controls**: Use [AWS Control Tower](https://aws.amazon.com/controltower/) to enforce security policies and guardrails. AWS Control Tower automates the setup of a secure, well-architected multi-account AWS environment based on AWS best practices.
 
-3. **Centralize Logging and Monitoring**: Set up centralized logging and monitoring using AWS CloudTrail and Amazon CloudWatch. AWS CloudTrail records AWS API calls for your account and delivers log files to you, while Amazon CloudWatch monitors your AWS resources and applications in real-time. This ensures that all activities are logged and monitored for security and compliance purposes.
+3. **Centralize Logging and Monitoring**: Set up centralized logging and monitoring using [AWS CloudTrail](https://aws.amazon.com/cloudtrail/) and [Amazon CloudWatch](https://aws.amazon.com/cloudwatch/). AWS CloudTrail records AWS API calls for your account and delivers log files to you, while Amazon CloudWatch monitors your AWS resources and applications in real-time. This ensures that all activities are logged and monitored for security and compliance purposes.
 
-4. **Automate with Infrastructure as Code**: Use AWS CloudFormation to automate the provisioning of your landing zone. AWS CloudFormation allows you to model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications. CloudFormation templates allow you to define your infrastructure as code, making it easy to replicate and manage.
+4. **Automate with Infrastructure as Code**: Use [AWS CloudFormation](https://aws.amazon.com/cloudformation/) to automate the provisioning of your landing zone. AWS CloudFormation allows you to model and set up your Amazon Web Services resources so that you can spend less time managing those resources and more time focusing on your applications. CloudFormation templates allow you to define your infrastructure as code, making it easy to replicate and manage.
 
-5. **Regular Audits and Compliance Checks**: Conduct regular audits and compliance checks using AWS Config and AWS Security Hub. AWS Config provides a detailed view of the configuration of AWS resources in your account, while AWS Security Hub aggregates, organizes, and prioritizes security alerts and findings from multiple AWS services. These services help you maintain compliance with industry standards and best practices.
+5. **Regular Audits and Compliance Checks**: Conduct regular audits and compliance checks using [AWS Config](https://aws.amazon.com/config/) and [AWS Security Hub](https://aws.amazon.com/security-hub/). AWS Config provides a detailed view of the configuration of AWS resources in your account, while AWS Security Hub aggregates, organizes, and prioritizes security alerts and findings from multiple AWS services. These services help you maintain compliance with industry standards and best practices.
 
 For detailed guidance on building a landing zone, check out the [AWS Prescriptive Guidance on Building a Landing Zone](https://docs.aws.amazon.com/prescriptive-guidance/latest/migration-aws-environment/building-landing-zones.html).
 

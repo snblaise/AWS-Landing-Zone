@@ -6,7 +6,7 @@ Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
       - Label:
-          default: "Organizational Units"
+          default: Organizational Units
         Parameters:
           - SecurityOuName
           - SandboxOuName
@@ -15,17 +15,17 @@ Metadata:
           - ProductionOuName
           - SharedResourcesOuName
       - Label:
-          default: "Account IDs"
+          default: Account IDs
         Parameters:
           - CentralizedLoggingAccountId
           - SecurityAccountId
       - Label:
-          default: "Retention Periods"
+          default: Retention Periods
         Parameters:
           - LoggingBucketRetentionPeriod
           - AccessLoggingBucketRetentionPeriod
       - Label:
-          default: "KMS Key"
+          default: KMS Key
         Parameters:
           - KMSKey
 
@@ -39,8 +39,12 @@ Mappings:
 
 # Conditions section
 Conditions:
-  IsUSEast1: !Equals [ !Ref "AWS::Region", "us-east-1" ]
-  IsUSWest2: !Equals [ !Ref "AWS::Region", "us-west-2" ]
+  IsUSEast1: !Equals
+    - !Ref AWS::Region
+    - us-east-1
+  IsUSWest2: !Equals
+    - !Ref AWS::Region
+    - us-west-2
 
 # Parameters section 
 Parameters:
@@ -84,12 +88,12 @@ Parameters:
 # Resources section
 Resources:
   MyLandingZone:
-    Type: 'AWS::ControlTower::LandingZone'
+    Type: AWS::ControlTower::LandingZone
     Properties:
       Version: '1.0'
       Tags:
-        - Key: 'Environment'
-          Value: 'Production'
+        - Key: Environment
+          Value: Production
       Manifest:
         governedRegions: !Ref GovernedRegions
         organizationStructure:
@@ -120,7 +124,7 @@ Resources:
             enabled: true
 
   ManagementRole:
-    Type: 'AWS::IAM::Role'
+    Type: AWS::IAM::Role
     Properties:
       RoleName: !Ref ManagementRoleName
       AssumeRolePolicyDocument:
@@ -129,7 +133,7 @@ Resources:
           - Effect: Allow
             Principal:
               AWS: '*'
-            Action: 'sts:AssumeRole'
+            Action: sts:AssumeRole
       Policies:
         - PolicyName: ManagementPolicy
           PolicyDocument:
@@ -137,13 +141,13 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - 'ec2:*'
-                  - 's3:*'
-                  - 'cloudwatch:*'
+                  - ec2:*
+                  - s3:*
+                  - cloudwatch:*
                 Resource: '*'
 
   DeveloperRole:
-    Type: 'AWS::IAM::Role'
+    Type: AWS::IAM::Role
     Properties:
       RoleName: !Ref DeveloperRoleName
       AssumeRolePolicyDocument:
@@ -152,7 +156,7 @@ Resources:
           - Effect: Allow
             Principal:
               AWS: '*'
-            Action: 'sts:AssumeRole'
+            Action: sts:AssumeRole
       Policies:
         - PolicyName: DeveloperPolicy
           PolicyDocument:
@@ -160,13 +164,13 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - 'ec2:*'
-                  - 's3:*'
-                  - 'cloudwatch:*'
+                  - ec2:*
+                  - s3:*
+                  - cloudwatch:*
                 Resource: '*'
 
   SalesRole:
-    Type: 'AWS::IAM::Role'
+    Type: AWS::IAM::Role
     Properties:
       RoleName: !Ref SalesRoleName
       AssumeRolePolicyDocument:
@@ -175,7 +179,7 @@ Resources:
           - Effect: Allow
             Principal:
               AWS: '*'
-            Action: 'sts:AssumeRole'
+            Action: sts:AssumeRole
       Policies:
         - PolicyName: SalesPolicy
           PolicyDocument:
@@ -183,46 +187,45 @@ Resources:
             Statement:
               - Effect: Allow
                 Action:
-                  - 's3:*'
-                  - 'cloudwatch:*'
+                  - s3:*
+                  - cloudwatch:*
                 Resource: '*'
 
   AttachManagementRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
+    Type: AWS::IAM::RolePolicyAttachment
     Properties:
       RoleName: !Ref ManagementRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${ManagementAccountId}:policy/ManagementPolicy'
+      PolicyArn: !Sub arn:aws:iam::${ManagementAccountId}:policy/ManagementPolicy
 
   AttachDeveloperRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
+    Type: AWS::IAM::RolePolicyAttachment
     Properties:
       RoleName: !Ref DeveloperRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${DeveloperAccountId}:policy/DeveloperPolicy'
+      PolicyArn: !Sub arn:aws:iam::${DeveloperAccountId}:policy/DeveloperPolicy
 
   AttachSalesRole:
-    Type: 'AWS::IAM::RolePolicyAttachment'
+    Type: AWS::IAM::RolePolicyAttachment
     Properties:
       RoleName: !Ref SalesRoleArn
-      PolicyArn: !Sub 'arn:aws:iam::${SalesAccountId}:policy/SalesPolicy'
+      PolicyArn: !Sub arn:aws:iam::${SalesAccountId}:policy/SalesPolicy
 
 # Outputs section
 Outputs:
   LandingZoneId:
-    Description: "The ID of the created landing zone"
+    Description: The ID of the created landing zone
     Value: !Ref MyLandingZone
   ManagementRoleArn:
-    Description: "The ARN of the Management IAM Role"
+    Description: The ARN of the Management IAM Role
     Value: !GetAtt ManagementRole.Arn
   DeveloperRoleArn:
-    Description: "The ARN of the Developer IAM Role"
+    Description: The ARN of the Developer IAM Role
     Value: !GetAtt DeveloperRole.Arn
   SalesRoleArn:
-    Description: "The ARN of the Sales IAM Role"
+    Description: The ARN of the Sales IAM Role
     Value: !GetAtt SalesRole.Arn
   CentralizedLoggingBucket:
-    Description: "The name of the centralized logging S3 bucket"
+    Description: The name of the centralized logging S3 bucket
     Value: !Ref CentralizedLoggingBucket
   AccessLoggingBucket:
-    Description: "The name of the access logging S3 bucket"
+    Description: The name of the access logging S3 bucket
     Value: !Ref AccessLoggingBucket
-
